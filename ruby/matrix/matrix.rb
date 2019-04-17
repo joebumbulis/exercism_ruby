@@ -9,13 +9,11 @@ class Matrix
 
   private
   def build_rows
-    matrix_array = matrix.split("\n")
-
-    matrix_array.map do |row|
+    matrix.lines.map do |row|
       row.split(' ').map(&:to_i)
     end
   end
-
+  
   def build_columns(rows)
     rows.transpose
   end
