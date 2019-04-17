@@ -1,15 +1,15 @@
 class Matrix
-  attr_reader :rows, :columns
+  attr_reader :rows, :columns, :matrix
 
   def initialize(matrix)
     @matrix = matrix
     @rows = build_rows
-    @columns = build_columns(@rows)
+    @columns = build_columns(rows)
   end
 
   private
   def build_rows
-    matrix_array = @matrix.split("\n")
+    matrix_array = matrix.split("\n")
 
     matrix_array.map do |row|
       row.split(' ').map(&:to_i)
