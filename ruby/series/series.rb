@@ -1,23 +1,20 @@
 class Series
-  attr_accessor :num_array
+  ERROR_MESSAGE = "Expected slice size to be the same size or smaller the string."
 
   def initialize(digits_string)
-    @num_array = digits_string.split('')
+    @num_array = digits_string.chars
   end
 
   def slices(series_length)
-    consecutive_groups = Array.new
+    raise ArgumentError.new(ERROR_MESSAGE) if (num_array.length < series_length)
 
-    if (num_array.length < series_length)
-      raise ArgumentError.new(
-        "Expected slice size to be the same size or smaller than string #{num_array.join}"
-      )
-    else
-      num_array.each_cons(series_length) do |group|
-        consecutive_groups.push(group.join)
-      end
-      consecutive_groups
-    end
+    transform_array_into_slices(series_length)
   end
 
+  private
+  attr_reader :num_array
+
+  def transform_array_into_slices(series_length)
+    num_array.each_cons(series_length).map(&:join)
+  end
 end
