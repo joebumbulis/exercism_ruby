@@ -13,7 +13,7 @@ class Matrix
       row.split(' ').map(&:to_i)
     end
   end
-  
+
   def build_columns(rows)
     rows.transpose
   end
