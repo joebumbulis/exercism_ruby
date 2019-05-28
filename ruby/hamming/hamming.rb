@@ -1,13 +1,25 @@
 class Hamming
-  ARG_ERROR = 'Arguments must be the same length'
+  def self.compute(strand1, strand2)
 
-  def self.compute(x_strand, y_strand)
-    raise ArgumentError, ARG_ERROR if x_strand != y_strand
-    check_ham(x_strand, y_strand)
+    unless strand1.length != strand2.length
+      nucleotides = pairs(strand1, strand2)
+      nucleotides.count{|n1, n2| n1 != n2}
+    else
+      raise StrandLengthError
+    end
   end
 
   private
-  def check_ham(x, y)
-    x.chars.zip(y.chars).count{|a, b| a != b}
+
+  def self.pairs(s1, s2)
+
+    s1.chars.zip(s2.chars)
+  end
+end
+
+class StrandLengthError < ArgumentError
+  
+  def initialize(message = 'Strand Lengths must be identical')
+    super
   end
 end
